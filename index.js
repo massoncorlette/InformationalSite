@@ -6,10 +6,7 @@ var fs = require('fs');
 http.createServer(function(req,res) { // creating basic server client side
   let q = url.parse(req.url, true); // use parse to read parts of URL
 
-  let filename = (q.pathname === '/') ? "./index.html" : "." + q.pathname;
-
-  console.log(filename);
-  console.log(q.pathname);
+  let filename = (q.pathname === '/') ? "./index.html" : "." + q.pathname + ".html";
 
    fs.readFile(filename, function(err, data) {
       if (err) {
