@@ -1,17 +1,14 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 
-app.get("/", function (req, res, next) {
-  var options = {
-    root: path.join(__dirname, 'public'),
+app.get('/:name', function (req, res, next) {
+  let options = {
+    root: path.join(__dirname, ),
     
   }
+  let fileName = req.params.name + ".html";
 
-  if (!(req.params.name)) {
-    res.sendFile('index.html');
-  }
-
-  let fileName = req.params.name
   res.sendFile(fileName, options, function (err) {
     if (err) {
       next(err)
@@ -21,7 +18,7 @@ app.get("/", function (req, res, next) {
   })
 })
 
-const PORT = 3000;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log("Port listening");
-})
+});
