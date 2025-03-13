@@ -1,23 +1,22 @@
 const express = require("express");
-const path = require("path");
+const path = require("node:path");
+
 const app = express();
 
-// initial index get
-app.get('/', function (req, res, next) {
-  let options = {
-    root:path.join(__dirname,),
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-  }
-  let fileName = "index.html";
+// app.js
+const links = [
+  { href: "/", text: "Home" },
+  { href: "about", text: "About" },
+];
 
-  res.sendFile(fileName, options, function (err) {
-    if (err) {
-      next(err)
-    } else {
-      console.log('Sent:', fileName)
-    }
-  });
+app.get("/", (req, res) => {
+  res.render("index", { links: links });
 });
+
+
 
 app.get('/:name', function (req, res, next) {
   let options = {
